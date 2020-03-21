@@ -1,0 +1,69 @@
+$(document).ready(function() {
+  var totalScore = 0;
+
+  $("#btn-questionnaire").on("click", function() {
+    $("#main-page").attr("class", "hide");
+    questionIndex = 0;
+    questionDisplay();
+  });
+
+  function questionDisplay() {
+    //   adds h tag and inserts question title
+    var questionTitle = $("<h5>").text(questions[questionIndex].question);
+    $("#questionnare-page").append(questionTitle);
+    //   loops through choices and adds buttons for each one
+    for (i = 0; i < questions[questionIndex].choices.length; i++) {
+      var btnTag = $("<button>")
+        .text(questions[questionIndex].choices[i])
+        .attr("class", "waves-effect waves-light btn")
+        .attr("value", i + 1);
+      $("#questionnare-page").append(btnTag);
+    }
+
+    $("button").on("click", function() {
+      var score = $(this).val();
+      console.log(score);
+
+      totalScore = parseInt(totalScore) + parseInt($(this).val());
+      console.log(parseInt(totalScore));
+
+      questionIndex++;
+      $("#questionnare-page").text("");
+      questionDisplay();
+    });
+  }
+
+  var questions = [
+    {
+      question:
+        "Thinking about the risk you have taken with your past investment choices, how would you describe the level of risk?",
+      choices: [
+        "Not applicable as my past experience is limited",
+        "Low",
+        "Moderate",
+        "High"
+      ]
+    },
+    {
+      question:
+        "In the context of investing, what best describes your attitude to risk?",
+      choices: [
+        "It is something to be avoided ",
+        "It is a source of uncertainty and needs to be limited",
+        "It can create the opportunity for improved returns",
+        "It is something to be embraced"
+      ]
+    },
+
+    {
+      question:
+        "If asked to make your own investment decisions how would you feel?",
+      choices: [
+        "Not confident at all",
+        "Somewhat hesitant",
+        "Reasonably confident",
+        "Very comfortable"
+      ]
+    }
+  ];
+});
