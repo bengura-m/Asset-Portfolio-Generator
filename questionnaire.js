@@ -21,16 +21,22 @@ $(document).ready(function() {
     }
 
     $("button").on("click", function() {
-      var score = $(this).val();
-      console.log(score);
-
       totalScore = parseInt(totalScore) + parseInt($(this).val());
       console.log(parseInt(totalScore));
 
       questionIndex++;
-      $("#questionnare-page").text("");
-      questionDisplay();
+      if (questionIndex === questions.length) {
+        $("#questionnare-page").text("")
+        resultsDisplay();
+      } else {
+        $("#questionnare-page").text("");
+        questionDisplay();
+      }
     });
+  }
+
+  function resultsDisplay () {
+      $("#questionnare-page").text("Your final score is: " + totalScore)
   }
 
   var questions = [
@@ -48,7 +54,7 @@ $(document).ready(function() {
       question:
         "In the context of investing, what best describes your attitude to risk?",
       choices: [
-        "It is something to be avoided ",
+        "It is something to be avoided",
         "It is a source of uncertainty and needs to be limited",
         "It can create the opportunity for improved returns",
         "It is something to be embraced"
@@ -63,6 +69,46 @@ $(document).ready(function() {
         "Somewhat hesitant",
         "Reasonably confident",
         "Very comfortable"
+      ]
+    },
+    {
+      question:
+        "If you held a sizable investment that regularly went up and down in value, which would you be likely to do?",
+      choices: [
+        "Watch its progress daily or weekly as I'm likely to be anxious about investment performance",
+        "Watch its progress monthly out of concern over investment performance",
+        "Watch its progress regularly, not out of concern, but just for general interest",
+        "Only check its progress once or twice a year"
+      ]
+    },
+    {
+      question:
+        "How would you feel if a large percentage of your investment portfolio was invested in the share market?",
+      choices: [
+        "Not comfortable",
+        "A little hesitant but willing to consider it",
+        "Reasonably comfortable",
+        "Very comfortable"
+      ]
+    },
+    {
+      question:
+        "If you owned a large amount of shares and the stock market fell quickly by 20%, what do you believe your natural reaction would be?",
+      choices: [
+        "To sell all the shares as soon as possible to avoid any further falls",
+        "To sell some of the shares to reduce exposure to future falls",
+        "To hold the shares and wait for a recovery",
+        "To look for ways to buy more shares"
+      ]
+    },
+    {
+      question:
+        "Investments that go up and down in value in the short-term (i.e. have volatility) are more likely to produce higher returns than investments that remain steady. Are you prepared to experience volatility in your investments in order to increase the chance of higher returns?",
+      choices: [
+        "No, not at all ",
+        "Yes, but only for some of my investment portfolio",
+        "Yes, for a significant part of my investment portfolio",
+        "Yes, definitely "
       ]
     }
   ];
