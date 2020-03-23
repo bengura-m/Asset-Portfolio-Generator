@@ -1,27 +1,54 @@
-var yahoo_path = "https://apidojo-yahoo-finance-v1.p.rapidapi.com.market.getsummary"
-var apikey = "&appid=43d993ffedmsh99ef2e1a86cfdf9p100046jsnaa81b3c2dd02";
-
-// grab all details from the yahoofinance app 
-
-function BetaOutput(){
-    var queryURL = yahoo_path + apikey; // must work out how to extract all data from yahoo finance
-    $.ajax({
-        url:queryURL,
-        method: "GET",
-    }).then(function(response){
-        console.log(response);
-        // insert variables based on html
-
-        $("#quizresult").empty();
-    //if user is a low risk , return 10 companies with beta between 0-0.35
-        if (quizresult = lowrisk){
-            // find the pathway to access beta between 0-0.35
-        }
-        else if (quizresult = mediumrisk){
-            // find the pathway to access beta between 0.36 - 0.66 
-        }
-        else (quizresult = highrisk){
-            // find the pathway to access beta between 0.67 - 1
-        }
-    })
-}
+$(document).ready(function() {
+    $("#mixed").on("click", function() {
+      // hides main page
+      $("#main-page").attr("class", "hide");
+  
+      var tickerArray = ["fmg.ax", "wes.ax", "anz.ax", "csl.ax", "wow.ax"];
+  
+      for (var i = 0; i < tickerArray.length; i++) {
+        var settings = {
+          async: true,
+          crossDomain: true,
+          url:
+            "https://apidojo-yahoo-finance-v1.p.rapidapi.com/stock/get-detail?region=AU&lang=en&symbol=" +
+            tickerArray[i],
+          method: "GET",
+          headers: {
+            "x-rapidapi-host": "apidojo-yahoo-finance-v1.p.rapidapi.com",
+            "x-rapidapi-key": "43d993ffedmsh99ef2e1a86cfdf9p100046jsnaa81b3c2dd02"
+          }
+        };
+  
+        $.ajax(settings).done(function(response) {
+          console.log(response);
+          var shareName = response.price.longName;
+          var shareSymbol = response.price.symbol;
+          var SharePrice = response.price.regularMarketPrice.fmt;
+          var beta = response.defaultKeyStatistics.beta.fmt;
+          var sharePreviousClose = response.summaryDetail.previousClose.fmt;
+          var SharePriceChange = (
+            ((SharePrice - sharePreviousClose) / sharePreviousClose) *
+            100
+          ).toFixed(2);
+  
+          var divTag = $("<div>");
+          divTag.attr("class", "col 2 card-panel blue");
+  
+          divTag.append(
+            shareName,
+            "<br>",
+            shareSymbol,
+            "<br>Last Price: ",
+            SharePrice,
+            "<br>Daily Change: ",
+            SharePriceChange,
+            "%<br> Beta: ",
+            beta
+          );
+  
+          $("#stocks").append(divTag);
+        });
+      }
+    });
+  });
+  
