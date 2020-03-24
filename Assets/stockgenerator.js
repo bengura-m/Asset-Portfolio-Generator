@@ -7,6 +7,7 @@ $(document).ready(function() {
   
       for (var i = 0; i < tickerArray.length; i++) {
         var settings = {
+          cache-control: max-age=2628000,
           async: true,
           crossDomain: true,
           url:
