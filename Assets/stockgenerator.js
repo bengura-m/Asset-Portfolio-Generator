@@ -7,10 +7,11 @@ $(document).ready(function() {
   
       for (var i = 0; i < tickerArray.length; i++) {
         var settings = {
-          cache-control: max-age=2628000,
+          
           async: true,
           crossDomain: true,
           url:
+            "cache-control": "max-age=2628000",
             "https://apidojo-yahoo-finance-v1.p.rapidapi.com/stock/get-detail?region=AU&lang=en&symbol=" +
             tickerArray[i],
           method: "GET",
