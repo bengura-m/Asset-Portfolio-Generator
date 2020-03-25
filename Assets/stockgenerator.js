@@ -14,6 +14,7 @@ $(document).ready(function() {
             tickerArray[i],
           method: "GET",
           headers: {
+            "Cache-Control": "max-age=2628000",
             "x-rapidapi-host": "apidojo-yahoo-finance-v1.p.rapidapi.com",
             "x-rapidapi-key": "43d993ffedmsh99ef2e1a86cfdf9p100046jsnaa81b3c2dd02"
           }
