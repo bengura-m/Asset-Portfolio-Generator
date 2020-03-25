@@ -1,5 +1,5 @@
 $(document).ready(function() {
-    $("#mixed").on("click", function() {
+    $("#balanced").on("click", function() {
       // hides main page
       $("#main-page").attr("class", "hide");
   

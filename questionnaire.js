@@ -7,6 +7,11 @@ $(document).ready(function() {
     questionDisplay();
   });
 
+  $("body").delegate("#restart", "click", function() {
+    $("#questionnare-page").text("");
+    $("#main-page").attr("class", "show");
+  });
+
   function questionDisplay() {
     //   adds h tag and inserts question title
     var questionTitle = $("<h5>").text(questions[questionIndex].question);
@@ -26,7 +31,7 @@ $(document).ready(function() {
 
       questionIndex++;
       if (questionIndex === questions.length) {
-        $("#questionnare-page").text("")
+        $("#questionnare-page").text("");
         resultsDisplay();
       } else {
         $("#questionnare-page").text("");
@@ -35,8 +40,59 @@ $(document).ready(function() {
     });
   }
 
-  function resultsDisplay () {
-      $("#questionnare-page").text("Your final score is: " + totalScore)
+  function resultsDisplay() {
+    if (totalScore <= 14) {
+      $("#questionnare-page")
+        .text("You have a Conservative Risk Profile")
+        .css("font-size", "25px")
+        .append("<br>");
+      $("#questionnare-page").append(
+        $("<button>")
+          .text("Create Conservative Portfolio")
+          .attr("class", "waves-effect waves-light btn")
+          .attr("id", "conservative")
+      );
+      $("#questionnare-page").append(
+        $("<button>")
+          .text("Restart")
+          .attr("class", "waves-effect waves-light btn")
+          .attr("id", "restart")
+      );
+    } else if (totalScore <= 22) {
+      $("#questionnare-page")
+        .text("You have a Balanced Risk Profile")
+        .css("font-size", "25px")
+        .append("<br>");
+      $("#questionnare-page").append(
+        $("<button>")
+          .text("Create Balanced Portfolio")
+          .attr("class", "waves-effect waves-light btn")
+          .attr("id", "balanced")
+      );
+      $("#questionnare-page").append(
+        $("<button>")
+          .text("Restart")
+          .attr("class", "waves-effect waves-light btn")
+          .attr("id", "restart")
+      );
+    } else {
+      $("#questionnare-page")
+        .text("You have an Aggressive Risk Profile")
+        .css("font-size", "25px")
+        .append("<br>");
+      $("#questionnare-page").append(
+        $("<button>")
+          .text("Create Aggressive Portfolio")
+          .attr("class", "waves-effect waves-light btn")
+          .attr("id", "aggressive")
+      );
+      $("#questionnare-page").append(
+        $("<button>")
+          .text("Restart")
+          .attr("class", "waves-effect waves-light btn")
+          .attr("id", "restart")
+      );
+    }
   }
 
   var questions = [
