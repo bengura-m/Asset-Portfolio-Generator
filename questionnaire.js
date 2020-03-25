@@ -49,7 +49,7 @@ $(document).ready(function() {
       $("#questionnare-page").append(
         $("<button>")
           .text("Create Conservative Portfolio")
-          .attr("class", "waves-effect waves-light btn")
+          .attr("class", "appetite-btn waves-effect waves-light btn")
           .attr("id", "conservative")
       );
       $("#questionnare-page").append(
@@ -66,7 +66,7 @@ $(document).ready(function() {
       $("#questionnare-page").append(
         $("<button>")
           .text("Create Balanced Portfolio")
-          .attr("class", "waves-effect waves-light btn")
+          .attr("class", "appetite-btn waves-effect waves-light btn")
           .attr("id", "balanced")
       );
       $("#questionnare-page").append(
@@ -83,7 +83,7 @@ $(document).ready(function() {
       $("#questionnare-page").append(
         $("<button>")
           .text("Create Aggressive Portfolio")
-          .attr("class", "waves-effect waves-light btn")
+          .attr("class", "appetite-btn waves-effect waves-light btn")
           .attr("id", "aggressive")
       );
       $("#questionnare-page").append(

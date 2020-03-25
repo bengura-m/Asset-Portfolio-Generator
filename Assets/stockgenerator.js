@@ -1,5 +1,6 @@
 $(document).ready(function() {
-  $(".appetite-btn").on("click", function() {
+  $("body").delegate(".appetite-btn", "click", function() {
+    $("#questionnare-page").text("");
     if (this.id === "conservative") {
       betaRange = "conservative";
     } else if (this.id === "balanced") {
@@ -12,9 +13,6 @@ $(document).ready(function() {
     $("#main-page").attr("class", "hide");
 
     var tickerArray = ["fmg.ax", "wes.ax", "anz.ax", "csl.ax", "wow.ax"];
-    // let conservativeArray = [];
-    // let balancedArray = [];
-    // let aggressiveArray = [];
 
     // loops through our array and makes a number of api requests
     for (let i = 0; i < tickerArray.length; i++) {
@@ -48,16 +46,10 @@ $(document).ready(function() {
         localStorage.setItem("storedTickerArray" + i, JSON.stringify(response));
         var beta = response.defaultKeyStatistics.beta.fmt;
         if (beta < 0.7 && betaRange === "conservative") {
-          // conservativeArray.push(response)
-          // console.log(betaRange);
           printStocks();
         } else if (beta < 1.5 && beta > 0.7 && betaRange === "balanced") {
-          // balancedArray.push(response)
-          console.log(betaRange);
           printStocks();
         } else if (beta > 1.5 && betaRange === "aggressive") {
-          // aggressiveArray.push(response)
-          console.log(betaRange);
           printStocks();
         }
 
