@@ -54,7 +54,7 @@ $(document).ready(function() {
         }
 
         function printStocks() {
-          var shareName = response.price.longName;
+          shareName = response.price.longName;
           var shareSymbol = response.price.symbol;
           var SharePrice = response.price.regularMarketPrice.fmt;
           var sharePreviousClose = response.summaryDetail.previousClose.fmt;
@@ -66,6 +66,8 @@ $(document).ready(function() {
           // creates div tag and appends share details
           var divTag = $("<button>");
           divTag.attr("class", "stock col 2 card-panel blue");
+          // adds a value attribute for when clicked for news API
+          divTag.attr("value", shareName);
           divTag.append(
             shareName,
             "<br>",
@@ -78,22 +80,20 @@ $(document).ready(function() {
             beta
           );
           $("#stocks").append(divTag);
+        } // click listener for when a stock is clicked, then share name is passed to the news
 
-          // click listener for when a stock is clicked, then share name is passed to the news
-          $(document).on("click", ".stock", function() {
-            // when share button is clicked
-            $("#resultsSection").empty();
-            // shareName = $(this).html();
-            getNews(shareName);
-          });
-        }
-      }
-    }
+      }      
+    }  $(document).on("click", ".stock", function() {
+          // when share button is clicked
+          $("#resultsSection").empty();
+          getNews(this.value);
+        });
   });
   // start of news section
   // var shareName = "ASX News"; // default  = "ASX News"
 
   function getNews(shareName) {
+    console.log(shareName);
     var searchTermQualifier = "";
     var newsSourceList = [
       "Fool.com.au",
