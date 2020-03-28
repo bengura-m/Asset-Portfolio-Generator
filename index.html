@@ -10,22 +10,31 @@
       href="https://fonts.googleapis.com/icon?family=Material+Icons"
       rel="stylesheet"
     />
+    <link href="https://fonts.googleapis.com/css?family=Roboto:700&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="style.css" />
 
     <title>Stock Portfolio Generator</title>
   </head>
   <body>
     <header class="cyan">
-      <h1 class="center-align">Stock Portfolio Generator</h1>
+      <div class="row">
+        <h1 class="center-align">Stock Portfolio Generator</h1>
+        <div id="btn-main" class="hide">
+          <a class="waves-effect waves-light btn"
+            ><i class="material-icons left">menu</i>Main Menu</a
+          >
+        </div>
+      </div>
     </header>
     <div class="center-align container cyan lighten-4">
       <div id="main-page">
-        <h4>Don't know your risk appetite?</h4>
-        <a id="btn-questionnaire" class="waves-effect waves-light btn"
-          ><i class="material-icons left">assignment_turned_in</i>Complete
-          Questionnaire</a
-        >
-        <h4>Pick your risk appetite</h4>
+        <h5>
+          Want to get into the stock market but don't know what stocks to
+          choose?
+        </h5>
+        <h5>
+          Select your risk appetite and we will create a list of stocks for you.
+        </h5>
         <a id="conservative" class="appetite-btn waves-effect waves-light btn"
           ><i class="material-icons left">trending_flat</i>Conservative</a
         >
@@ -34,6 +43,14 @@
         >
         <a id="aggressive" class="appetite-btn waves-effect waves-light btn"
           ><i class="material-icons left">trending_up</i>Aggressive</a
+        >
+        <h5>
+          Don't know your risk appetite? Complete our quick Questionnaire and
+          we'll tell you.
+        </h5>
+        <a id="btn-questionnaire" class="waves-effect waves-light btn"
+          ><i class="material-icons left">assignment_turned_in</i>Complete
+          Questionnaire</a
         >
       </div>
       <div id="questionnare-page" class="center-align"></div>
