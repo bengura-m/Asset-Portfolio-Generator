@@ -1,11 +1,17 @@
 $(document).ready(function() {
+
+  $('.modal').modal(); // open a modal using a trigger
+  
+ 
+
   // when menu button clicked reloads page and goes back to start
   $("#btn-main").on("click", function() {
     window.location.reload();
   });
   // used the delegate so that buttons that were added to the dom are able to be clicked
-  $("body").delegate(".appetite-btn", "click", function() {
+ $("body").on("click", ".appetite-btn", function() { 
     $("#btn-main").attr("class", "center-align show");
+
     $("#questionnare-page").text("");
     // checks to see what button is clicked and then assigns a beta range
     if (this.id === "conservative") {
@@ -40,8 +46,7 @@ $(document).ready(function() {
           method: "GET",
           headers: {
             "x-rapidapi-host": "apidojo-yahoo-finance-v1.p.rapidapi.com",
-            "x-rapidapi-key":
-              "43d993ffedmsh99ef2e1a86cfdf9p100046jsnaa81b3c2dd02"
+            "x-rapidapi-key":  "43d993ffedmsh99ef2e1a86cfdf9p100046jsnaa81b3c2dd02"
           }
         };
         $.ajax(settings).done(function(response) {
@@ -49,7 +54,7 @@ $(document).ready(function() {
         });
       }
       function displayStocks(response) {
-        console.log(response);
+        console.log(response); // remove this line on pushing to master/production
         localStorage.setItem("storedTickerArray" + i, JSON.stringify(response));
         var beta = response.defaultKeyStatistics.beta.fmt;
         // goes through stocks and only prints the stocks that fall within a beta range that was cicked and stored in betaRange variable
@@ -74,7 +79,9 @@ $(document).ready(function() {
 
           // creates div tag and appends share details
           var divTag = $("<button>");
+
           divTag.attr("class", "stock waves-effect");
+
           // adds a value attribute for when clicked for news API
           divTag.attr("value", shareName);
           divTag.append(
@@ -89,6 +96,7 @@ $(document).ready(function() {
             beta
           );
           $("#stocks").append(divTag);
+
         }
       }
     }
@@ -103,9 +111,11 @@ $(document).ready(function() {
   // var shareName = "ASX News"; // default  = "ASX News"
 
   function getNews(shareName) {
-    console.log(shareName);
+
+    console.log(shareName); // remove on pushing to master
+
     var searchTermQualifier = "";
-    var newsSourceList = [
+    var newsSourceList = [ //source names are case sensetive and specific to match response - do not change
       "Fool.com.au",
       "Australian Financial Review",
       "Savings.com.au",
@@ -119,7 +129,7 @@ $(document).ready(function() {
     ];
     // NEWS API
     var queryURL =
-      "https://newsapi.org/v2/everything?" + //api return everthing and not just headlines
+      "https://newsapi.org/v2/everything?" + //api returns everthing and not just headlines
       "q=" +
       shareName +
       " " +
@@ -137,22 +147,23 @@ $(document).ready(function() {
 
     $.ajax(settings).done(function(response) {
       var relevantResult = false;
-      var count = 0;
+      var count = 0; //keep count of number of relevant results
 
       if (response.totalResults > 0) {
         for (var i = 0; i < response.articles.length; i++) {
-          if (newsSourceList.includes(response.articles[i].source.name)) {
+          if (newsSourceList.includes(response.articles[i].source.name)) { //if result article is in our list of news sources, helps filter relevant results
             console.log(
               newsSourceList.includes(response.articles[i].source.name)
-            );
+            ); //remove when pushed to master
             relevantResult = true;
-            count++;
-            //GET title
+            count++; 
+            //GET title and source URL
             var title = response.articles[i].title;
             var titleEl = $("<a>").text(title);
             var urlSource = response.articles[i].url;
-            titleEl.attr("href", urlSource);
-            titleEl.attr("target", "_blank");
+        
+            titleEl.addClass("waves-effect waves-dark modal-trigger"); //.modal-trigger class makes modal visible based on id
+            titleEl.attr("href", "#modal" + i);
 
             //GET descripition
             var description = response.articles[i].description;
@@ -186,16 +197,37 @@ $(document).ready(function() {
               }
             );
 
+            // CREATE Modal - News Snippet
+
+            //<!-- Modal Structure -->
+            var modalEl = $("<div>").addClass("modal")
+            modalEl.attr("id","modal"+i);
+            var modalContentDivEl = $("<div>").addClass("modal-content")
+
+            var modalHeaderEl = $("<h4>").text(shareName);
+            var modalHeaderTitleEl = $("<h5>").text(title);
+ 
+            var modalTextEl = $("<p>").text(content);
+            modalContentDivEl.append(imageEl, modalHeaderEl, "<hr>", modalHeaderTitleEl, modalTextEl);
+
+            var modalFooterDivEl = $("<div>").addClass("modal-footer");
+            var modalFooterLinkEl = $("<a>").attr({"href": urlSource, "target": "_blank"});
+            modalFooterLinkEl.addClass("modal-action modal-close waves-effect waves-green btn-flat").text("Learn more");
+            modalFooterDivEl.append(modalFooterLinkEl);
+          
+            modalEl.append(modalContentDivEl, modalFooterDivEl);
+      
+  
             // DISPLAY HTML elements to DOM
 
             $("#resultsSection").append(
               imageEl,
               titleEl,
-              contentEl,
-              authorEl,
-              publishedAtEl,
+              modalEl, // not visible until modal is triggered
               "<hr>"
+
             );
+            $('.modal').modal();
 
             if (count === 10) {
               // limit relevant results to 10
@@ -222,4 +254,5 @@ $(document).ready(function() {
       }
     }); // ajax API call close
   } // getNews function close
+
 });
