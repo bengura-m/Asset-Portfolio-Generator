@@ -1,10 +1,13 @@
 $(document).ready(function() {
+  // when menu button clicked reloads page and goes back to start
   $("#btn-main").on("click", function() {
     window.location.reload();
   });
+  // used the delegate so that buttons that were added to the dom are able to be clicked
   $("body").delegate(".appetite-btn", "click", function() {
     $("#btn-main").attr("class", "center-align show");
     $("#questionnare-page").text("");
+    // checks to see what button is clicked and then assigns a beta range
     if (this.id === "conservative") {
       betaRange = "conservative";
     } else if (this.id === "balanced") {
@@ -49,6 +52,7 @@ $(document).ready(function() {
         console.log(response);
         localStorage.setItem("storedTickerArray" + i, JSON.stringify(response));
         var beta = response.defaultKeyStatistics.beta.fmt;
+        // goes through stocks and only prints the stocks that fall within a beta range that was cicked and stored in betaRange variable
         if (beta < 0.7 && betaRange === "conservative") {
           printStocks();
         } else if (beta < 1.5 && beta > 0.7 && betaRange === "balanced") {
@@ -57,6 +61,7 @@ $(document).ready(function() {
           printStocks();
         }
 
+        // prints stocks on the DOM
         function printStocks() {
           var shareName = response.price.longName;
           var shareSymbol = response.price.symbol;
@@ -84,9 +89,10 @@ $(document).ready(function() {
             beta
           );
           $("#stocks").append(divTag);
-        } // click listener for when a stock is clicked, then share name is passed to the news
+        }
       }
     }
+    // click listener for when a stock is clicked, then share name is passed to the getnews function and run
     $(document).on("click", ".stock", function() {
       // when share button is clicked
       $("#resultsSection").empty();
