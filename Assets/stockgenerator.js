@@ -1,5 +1,9 @@
 $(document).ready(function() {
+  $("#btn-main").on("click", function() {
+    window.location.reload();
+  });
   $("body").delegate(".appetite-btn", "click", function() {
+    $("#btn-main").attr("class", "center-align show");
     $("#questionnare-page").text("");
     if (this.id === "conservative") {
       betaRange = "conservative";
@@ -54,7 +58,7 @@ $(document).ready(function() {
         }
 
         function printStocks() {
-          shareName = response.price.longName;
+          var shareName = response.price.longName;
           var shareSymbol = response.price.symbol;
           var SharePrice = response.price.regularMarketPrice.fmt;
           var sharePreviousClose = response.summaryDetail.previousClose.fmt;
@@ -65,7 +69,7 @@ $(document).ready(function() {
 
           // creates div tag and appends share details
           var divTag = $("<button>");
-          divTag.attr("class", "stock col 2 card-panel blue");
+          divTag.attr("class", "stock waves-effect");
           // adds a value attribute for when clicked for news API
           divTag.attr("value", shareName);
           divTag.append(
@@ -81,13 +85,13 @@ $(document).ready(function() {
           );
           $("#stocks").append(divTag);
         } // click listener for when a stock is clicked, then share name is passed to the news
-
-      }      
-    }  $(document).on("click", ".stock", function() {
-          // when share button is clicked
-          $("#resultsSection").empty();
-          getNews(this.value);
-        });
+      }
+    }
+    $(document).on("click", ".stock", function() {
+      // when share button is clicked
+      $("#resultsSection").empty();
+      getNews(this.value);
+    });
   });
   // start of news section
   // var shareName = "ASX News"; // default  = "ASX News"

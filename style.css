@@ -1,15 +1,47 @@
+html
+ {
+ 
+  height: 100% !important;
+}
+
 .container {
-    height: 100%;
-  }
+   min-height: 1200px !important;
+   padding-top: 20px;
+}
 
-h1, h4, h5 {
-      margin: 0px;
-  }
 
-  .btn {
-      margin: 20px;
-  }
+.row {
+  margin: 0px;
+}
 
-  .stock {
-    margin: 5px;
-  }
+h1,
+h4,
+h5,
+p {
+  margin: 0px;
+}
+
+.btn {
+  margin: 20px;
+}
+
+.stock {
+  margin: 5px;
+  padding: 10px !important;
+  border-radius: 25px;
+  color: black;
+}
+
+header {
+  height: 150px;
+}
+
+h1 {
+  font-family: 'Roboto', sans-serif;
+}
+
+#resultsSection {
+  padding-left: 50px;
+  padding-right: 50px;
+  
+}

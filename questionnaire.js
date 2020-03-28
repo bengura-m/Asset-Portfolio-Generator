@@ -2,14 +2,14 @@ $(document).ready(function() {
   var totalScore = 0;
 
   $("#btn-questionnaire").on("click", function() {
+    $("#btn-main").attr("class", "center-align show");
     $("#main-page").attr("class", "hide");
     questionIndex = 0;
     questionDisplay();
   });
 
   $("body").delegate("#restart", "click", function() {
-    $("#questionnare-page").text("");
-    $("#main-page").attr("class", "show");
+    window.location.reload();
   });
 
   function questionDisplay() {
@@ -54,7 +54,7 @@ $(document).ready(function() {
       );
       $("#questionnare-page").append(
         $("<button>")
-          .text("Restart")
+          .text("Main Menu")
           .attr("class", "waves-effect waves-light btn")
           .attr("id", "restart")
       );
@@ -71,7 +71,7 @@ $(document).ready(function() {
       );
       $("#questionnare-page").append(
         $("<button>")
-          .text("Restart")
+          .text("Main Menu")
           .attr("class", "waves-effect waves-light btn")
           .attr("id", "restart")
       );
@@ -88,7 +88,7 @@ $(document).ready(function() {
       );
       $("#questionnare-page").append(
         $("<button>")
-          .text("Restart")
+          .text("Main Menu")
           .attr("class", "waves-effect waves-light btn")
           .attr("id", "restart")
       );
