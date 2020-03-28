@@ -1,8 +1,19 @@
 $(document).ready(function() {
 
   $('.modal').modal(); // open a modal using a trigger
-  $("body").on("click", ".appetite-btn", function() { 
+  
+ 
+
+  // when menu button clicked reloads page and goes back to start
+  $("#btn-main").on("click", function() {
+    window.location.reload();
+  });
+  // used the delegate so that buttons that were added to the dom are able to be clicked
+ $("body").on("click", ".appetite-btn", function() { 
+    $("#btn-main").attr("class", "center-align show");
+
     $("#questionnare-page").text("");
+    // checks to see what button is clicked and then assigns a beta range
     if (this.id === "conservative") {
       betaRange = "conservative";
     } else if (this.id === "balanced") {
@@ -46,6 +57,7 @@ $(document).ready(function() {
         console.log(response); // remove this line on pushing to master/production
         localStorage.setItem("storedTickerArray" + i, JSON.stringify(response));
         var beta = response.defaultKeyStatistics.beta.fmt;
+        // goes through stocks and only prints the stocks that fall within a beta range that was cicked and stored in betaRange variable
         if (beta < 0.7 && betaRange === "conservative") {
           printStocks();
         } else if (beta < 1.5 && beta > 0.7 && betaRange === "balanced") {
@@ -54,6 +66,7 @@ $(document).ready(function() {
           printStocks();
         }
 
+        // prints stocks on the DOM
         function printStocks() {
           var shareName = response.price.longName;
           var shareSymbol = response.price.symbol;
@@ -66,7 +79,9 @@ $(document).ready(function() {
 
           // creates div tag and appends share details
           var divTag = $("<button>");
-          divTag.attr("class", "stock col 2 card-panel blue");
+
+          divTag.attr("class", "stock waves-effect");
+
           // adds a value attribute for when clicked for news API
           divTag.attr("value", shareName);
           divTag.append(
@@ -81,20 +96,24 @@ $(document).ready(function() {
             beta
           );
           $("#stocks").append(divTag);
-        } // click listener for when a stock is clicked, then share name is passed to the news
 
-      }      
-    }  $(document).on("click", ".stock", function() {
-          // when share button is clicked
-          $("#resultsSection").empty();
-          getNews(this.value);
-        });
+        }
+      }
+    }
+    // click listener for when a stock is clicked, then share name is passed to the getnews function and run
+    $(document).on("click", ".stock", function() {
+      // when share button is clicked
+      $("#resultsSection").empty();
+      getNews(this.value);
+    });
   });
   // start of news section
   // var shareName = "ASX News"; // default  = "ASX News"
 
   function getNews(shareName) {
+
     console.log(shareName); // remove on pushing to master
+
     var searchTermQualifier = "";
     var newsSourceList = [ //source names are case sensetive and specific to match response - do not change
       "Fool.com.au",
