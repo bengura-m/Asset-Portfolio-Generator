@@ -17,49 +17,99 @@
     <title>Stock Portfolio Generator</title>
   </head>
   <body>
-    <header class="cyan">
-      <div class="row">
-        <h1 class="center-align">Stock Portfolio Generator</h1>
-        <div id="btn-main" class="hide">
-          <a class="waves-effect waves-light btn"
-            ><i class="material-icons left">menu</i>Main Menu</a
-          >
+    <header class="header">
+      <nav>
+        <div class="nav-wrapper deep-purple darken-4">
+          <a href="#!" class="brand-logo"><i class="material-icons">assessment</i>Stock Profile Generator</a>
+          <ul class="right hide-on-med-and-down">
+            <li id="btn-main" class="hide"><a class="waves-effect deep-purple btn"><i class="material-icons left">menu</i></a></li>
+          </ul>
         </div>
-      </div>
+      </nav>
+
     </header>
-    <div class="center-align container cyan lighten-4">
-      <div id="main-page">
-        <h5>
-          Want to get into the stock market but don't know what stocks to
-          choose?
-        </h5>
-        <h5>
-          Select your risk appetite and we will create a list of stocks for you.
-        </h5>
-        <a id="conservative" class="appetite-btn waves-effect waves-light btn"
-          ><i class="material-icons left">trending_flat</i>Conservative</a
-        >
-        <a id="balanced" class="appetite-btn waves-effect waves-light btn"
-          ><i class="material-icons left">tune</i>Balanced</a
-        >
-        <a id="aggressive" class="appetite-btn waves-effect waves-light btn"
-          ><i class="material-icons left">trending_up</i>Aggressive</a
-        >
-        <h5>
-          Don't know your risk appetite? Complete our quick Questionnaire and
-          we'll tell you.
-        </h5>
-        <a id="btn-questionnaire" class="waves-effect waves-light btn"
-          ><i class="material-icons left">assignment_turned_in</i>Complete
-          Questionnaire</a
-        >
-      </div>
+
+<main class="center-align container">
+  <div id="main-page">
+          <div class="hero-image">
+            <img src="https://cdn.pixabay.com/photo/2017/06/17/10/17/entrepreneur-2411763_960_720.jpg" class="responsive-img">
+          </div>
+          <div class="hero-text">
+            <h2 style="font-size:3rem">Want to get into the stock market but don't know what stocks to
+                choose?</h2>
+                <p>You are at the right place!</p>
+            </div>
+            
+            
+            <div class="row flow-text">
+              <h4 class="teal white-text">Select your risk appetite and we will create a list of stocks for you.</h4>
+              
+              <div class="col s12 m4">
+                <div class="card">
+                  <div class="card-image">
+                    <img src="https://images.pexels.com/photos/211151/pexels-photo-211151.jpeg?auto=compress&cs=tinysrgb&dpr=1&w=500">
+                    <h5 class="card-title-text">Conservative</h5>
+                  </div>
+                  <div class="card-content">
+                    <p>Investors who want their money to grow but do not want to risk their principle investment. Conservative investors choose financial products that do not fluctuate much in value, such as conservative mutual funds.</p>
+                  </div>
+                  <div class="card-action">
+                    <a id="conservative" class="appetite-btn waves-effect waves-light btn"
+                    ><i class="material-icons left">trending_flat</i>Conservative</a>
+                  </div>
+                </div>
+              </div>
+              
+              <div class="col s12 m4">
+                <div class="card">
+                  <div class="card-image">
+                    <img src="https://images.pexels.com/photos/816377/pexels-photo-816377.jpeg?auto=compress&cs=tinysrgb&dpr=1&w=500">
+                    <h5 class="card-title-text">Balanced</h5>
+                  </div>
+                  <div class="card-content">
+                    <p>Investors whose objective is to obtain a balance of security, income and growth with security and income ranking before growth in priority. Looks to invest around 50% in growth assets and the remainder in defensive assets</p>
+                  </div>
+                  <div class="card-action">
+                    <a id="balanced" class="appetite-btn waves-effect waves-light btn"
+                    ><i class="material-icons left">tune</i>Balanced</a>
+                  </div>
+                </div>
+              </div>
+              
+              <div class="col s12 m4">
+                <div class="card">
+                  <div class="card-image">
+                    <img src="https://images.pexels.com/photos/652348/pexels-photo-652348.jpeg?auto=compress&cs=tinysrgb&dpr=1&w=500">
+                    <h5 class="card-title-text">Agressive</h5>
+                  </div>
+                  <div class="card-content">
+                    <p>Investors who put a large part of their portfolios in stocks of less well-established companies without a history of earnings or dividends. Sometimes gets higher returns for taking big risks, but must actively monitor the stocks they invest in.</p>
+                  </div>
+                  <div class="card-action">
+                    <a id="aggressive" class="appetite-btn waves-effect waves-light btn"
+                    ><i class="material-icons left">trending_up</i>Aggressive</a>
+                  </div>
+                </div>
+              </div>
+
+            </div>
+            <h5>
+              Don't know your risk appetite? <br>Complete our quick Questionnaire and
+              we'll tell you.
+            </h5>
+            <a id="btn-questionnaire" class="waves-effect waves-light btn"
+              ><i class="material-icons left">assignment_turned_in</i>Complete
+              Questionnaire</a
+            >
+        </div>
+
+     
       <div id="questionnare-page" class="center-align"></div>
       <div id="results"></div>
       <div id="stocks" class="row"></div>
-      <div id="resultsSection" class="collection">
+      <div id="resultsSection" class="collection card  blue lighten-3">
       </div>
-    </div>
+    </main>
     <script
       src="https://code.jquery.com/jquery-latest.min.js"
       type="text/javascript"
