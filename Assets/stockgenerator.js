@@ -1,15 +1,12 @@
 $(document).ready(function() {
-
-  $('.modal').modal(); // open a modal using a trigger
-  
- 
+  $(".modal").modal(); // open a modal using a trigger
 
   // when menu button clicked reloads page and goes back to start
   $("#btn-main").on("click", function() {
     window.location.reload();
   });
   // used the delegate so that buttons that were added to the dom are able to be clicked
- $("body").on("click", ".appetite-btn", function() { 
+  $("body").on("click", ".appetite-btn", function() {
     $("#btn-main").attr("class", "center-align show");
 
     $("#questionnare-page").text("");
@@ -46,7 +43,8 @@ $(document).ready(function() {
           method: "GET",
           headers: {
             "x-rapidapi-host": "apidojo-yahoo-finance-v1.p.rapidapi.com",
-            "x-rapidapi-key":  "43d993ffedmsh99ef2e1a86cfdf9p100046jsnaa81b3c2dd02"
+            "x-rapidapi-key":
+              "43d993ffedmsh99ef2e1a86cfdf9p100046jsnaa81b3c2dd02"
           }
         };
         $.ajax(settings).done(function(response) {
@@ -96,7 +94,6 @@ $(document).ready(function() {
             beta
           );
           $("#stocks").append(divTag);
-
         }
       }
     }
@@ -111,11 +108,11 @@ $(document).ready(function() {
   // var shareName = "ASX News"; // default  = "ASX News"
 
   function getNews(shareName) {
-
     console.log(shareName); // remove on pushing to master
 
     var searchTermQualifier = "";
-    var newsSourceList = [ //source names are case sensetive and specific to match response - do not change
+    var newsSourceList = [
+      //source names are case sensetive and specific to match response - do not change
       "Fool.com.au",
       "Australian Financial Review",
       "Savings.com.au",
@@ -146,23 +143,25 @@ $(document).ready(function() {
     };
 
     $.ajax(settings).done(function(response) {
+      console.log(response);
       var relevantResult = false;
       var count = 0; //keep count of number of relevant results
 
       if (response.totalResults > 0) {
         for (var i = 0; i < response.articles.length; i++) {
-          if (newsSourceList.includes(response.articles[i].source.name)) { //if result article is in our list of news sources, helps filter relevant results
+          if (newsSourceList.includes(response.articles[i].source.name)) {
+            //if result article is in our list of news sources, helps filter relevant results
             console.log(
               newsSourceList.includes(response.articles[i].source.name)
             ); //remove when pushed to master
             relevantResult = true;
-            count++; 
+            count++;
             //GET title and source URL
             var title = response.articles[i].title;
             var titleEl = $("<a>").text(title);
             var urlSource = response.articles[i].url;
-        
-            titleEl.addClass("waves-effect waves-dark modal-trigger"); //.modal-trigger class makes modal visible based on id
+
+            titleEl.addClass("waves-effect waves-dark modal-trigger col 9"); //.modal-trigger class makes modal visible based on id
             titleEl.attr("href", "#modal" + i);
 
             //GET descripition
@@ -185,7 +184,9 @@ $(document).ready(function() {
 
             //GET image url
             var urlImage = response.articles[i].urlToImage;
-            var imageEl = $("<img>").attr("src", urlImage);
+            var imageEl = $("<img>")
+              .attr("src", urlImage)
+              .addClass("col 3");
             imageEl.css(
               //thumbnail styling
               {
@@ -200,34 +201,48 @@ $(document).ready(function() {
             // CREATE Modal - News Snippet
 
             //<!-- Modal Structure -->
-            var modalEl = $("<div>").addClass("modal")
-            modalEl.attr("id","modal"+i);
-            var modalContentDivEl = $("<div>").addClass("modal-content")
+            var modalEl = $("<div>").addClass("modal");
+            modalEl.attr("id", "modal" + i);
+            var modalContentDivEl = $("<div>").addClass("modal-content");
 
             var modalHeaderEl = $("<h4>").text(shareName);
             var modalHeaderTitleEl = $("<h5>").text(title);
- 
+
             var modalTextEl = $("<p>").text(content);
-            modalContentDivEl.append(imageEl, modalHeaderEl, "<hr>", modalHeaderTitleEl, modalTextEl);
+            modalContentDivEl.append(
+              imageEl,
+              modalHeaderEl,
+              "<hr>",
+              modalHeaderTitleEl,
+              modalTextEl
+            );
 
             var modalFooterDivEl = $("<div>").addClass("modal-footer");
-            var modalFooterLinkEl = $("<a>").attr({"href": urlSource, "target": "_blank"});
-            modalFooterLinkEl.addClass("modal-action modal-close waves-effect waves-green btn-flat").text("Learn more");
+            var modalFooterLinkEl = $("<a>").attr({
+              href: urlSource,
+              target: "_blank"
+            });
+            modalFooterLinkEl
+              .addClass(
+                "modal-action modal-close waves-effect waves-green btn-flat"
+              )
+              .text("Read Full Article");
             modalFooterDivEl.append(modalFooterLinkEl);
-          
-            modalEl.append(modalContentDivEl, modalFooterDivEl);
-      
-  
-            // DISPLAY HTML elements to DOM
 
-            $("#resultsSection").append(
+            modalEl.append(modalContentDivEl, modalFooterDivEl);
+
+            // DISPLAY HTML elements to DOM
+            var divTag = $("<div>");
+            divTag.attr("class", "row");
+            divTag.append(
               imageEl,
               titleEl,
-              modalEl, // not visible until modal is triggered
-              "<hr>"
-
+              modalEl // not visible until modal is triggered
             );
-            $('.modal').modal();
+            $("#resultsSection")
+              .append(divTag)
+              .append("<hr>");
+            $(".modal").modal();
 
             if (count === 10) {
               // limit relevant results to 10
@@ -254,5 +269,4 @@ $(document).ready(function() {
       }
     }); // ajax API call close
   } // getNews function close
-
 });

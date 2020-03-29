@@ -45,3 +45,12 @@ h1 {
   padding-right: 50px;
   
 }
+
+hr {
+  height: 2px;
+  background: grey;
+}
+
+.modal-trigger {
+  font-size: 20px;
+}
