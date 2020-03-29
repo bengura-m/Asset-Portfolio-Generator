@@ -129,7 +129,7 @@ $(document).ready(function() {
       var relevantResult = false;
       var count = 0; //keep count of number of relevant results
       $("#resultsSection").append(
-        "<h3>Top News Stories</h3>"
+        "<h3 class='animated bounceInDown bold-text'>Top News Stories</h3><hr>"
       );
       if (response.totalResults > 0) {
         for (var i = 0; i < response.articles.length; i++) {
@@ -141,7 +141,7 @@ $(document).ready(function() {
             count++; 
             //GET title, source Name & URL
             var title = response.articles[i].title;
-            var titleEl = $("<a>").text(title);
+            var titleEl = $("<b><a>").text(title);
             var urlSource = response.articles[i].url;
             var sourceName = response.articles[i].source.name
         
@@ -159,8 +159,7 @@ $(document).ready(function() {
 
             //GET Author
             var author = response.articles[i].author;
-            var authorEl = $("<p>").text(author);
-
+  
             //GET publish date time
             var publishedAt = response.articles[i].publishedAt;
             publishedAt = new Date(publishedAt).toDateString(); // reformat date time
@@ -168,31 +167,21 @@ $(document).ready(function() {
 
             //GET image url
             var urlImage = response.articles[i].urlToImage;
-            var imageEl = $("<img>").attr({"src": urlImage, "alt":"News Image Thumbnail"});
-            imageEl.css(
-              //thumbnail styling
-              {
-                border: "1px solid #ddd" /* Gray border */,
-                "border-radius": "4px" /* Rounded border */,
-                padding: "5px" /* Some padding */,
-                margin: "5px" /* Some padding */,
-                width: "150px" /* Set a small width */
-              }
-            );
+
             // CREATE Collection News Item
 
-            var collectionItemEl = $("<a href='#modal" + i +"' class='collection-item avatar modal-trigger left-align'>");
-            var collectionItemImage = $("<img>").attr({"src": urlImage, "alt":"News Image Thumbnail"}).addClass("circle hoverable");
+            var collectionItemEl = $("<a href='#modal" + i +"' class='animated zoomIn collection-item avatar z-depth-2 modal-trigger left-align'>");
+            var collectionItemImage = $("<img class='responsive-img z-depth-1'>").attr({"src": urlImage, "alt":"News Image Thumbnail"}).addClass("circle hoverable");
             collectionItemEl.css({
-              "border-radius": "5px",
-              margin: "5px" /* Some padding */,
+              "border-radius": ".5rem",
+              margin: "0.8rem" /* Some padding */,
                });
 
             collectionItemEl.append(
               collectionItemImage,
               titleEl,
               publishedAtEl,
-              "<span>"+sourceName+"</span>",
+              "<span>" + author + "  |  "+ sourceName + "</span>",
             );
             // CREATE Modal - News Snippet
 
@@ -200,15 +189,8 @@ $(document).ready(function() {
             var modalEl = $("<div>").addClass("modal")
             modalEl.attr("id","modal"+i);
             var modalContentDivEl = $("<div>").addClass("modal-content")
-            var modalImage = $("<img>").attr({"src":urlImage, "alt" : "News Snippet Image"});
-            modalImage.css(
-              //modal image styling
-              {
-                padding: "2px" /* Some padding */,
-                width: "70%", /* Cover percentage of modal */
-                "box-shadow": "2px 2px 5px grey" /* Small grey shadow */
-              }
-            );
+            var modalImage = $("<img class='responsive-img z-depth-2'>").attr({"src":urlImage, "alt" : "News Snippet Image"});
+
             var modalHeaderEl = $("<h4>").text(shareName);
             var modalHeaderTitleEl = $("<h5>").text(title);
  
@@ -217,7 +199,7 @@ $(document).ready(function() {
 
             var modalFooterDivEl = $("<div>").addClass("modal-footer");
             var modalFooterLinkEl = $("<a>").attr({"href": urlSource, "target": "_blank"});
-            modalFooterLinkEl.addClass("modal-action modal-close waves-effect waves-green btn-flat blue-text cyan lighten-4").text("Read Full Article");
+            modalFooterLinkEl.addClass("modal-action modal-close waves-effect waves-green btn-flat blue-text cyan lighten-4").text("Read More");
             modalFooterLinkEl.append($("<i class='material-icons right'>").text("subdirectory_arrow_right"));
             
             modalFooterDivEl.append(modalFooterLinkEl);
