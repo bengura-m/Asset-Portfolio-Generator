@@ -128,7 +128,9 @@ $(document).ready(function() {
     $.ajax(settings).done(function(response) {
       var relevantResult = false;
       var count = 0; //keep count of number of relevant results
-
+      $("#resultsSection").append(
+        "<h3>Top News Stories</h3>"
+      );
       if (response.totalResults > 0) {
         for (var i = 0; i < response.articles.length; i++) {
           if (newsSourceList.includes(response.articles[i].source.name)) { //if result article is in our list of news sources, helps filter relevant results
@@ -137,10 +139,11 @@ $(document).ready(function() {
             ); //remove when pushed to master
             relevantResult = true;
             count++; 
-            //GET title and source URL
+            //GET title, source Name & URL
             var title = response.articles[i].title;
             var titleEl = $("<a>").text(title);
             var urlSource = response.articles[i].url;
+            var sourceName = response.articles[i].source.name
         
             titleEl.addClass("waves-effect waves-dark modal-trigger"); //.modal-trigger class makes modal visible based on id
             titleEl.attr("href", "#modal" + i);
@@ -165,7 +168,7 @@ $(document).ready(function() {
 
             //GET image url
             var urlImage = response.articles[i].urlToImage;
-            var imageEl = $("<img>").attr("src", urlImage);
+            var imageEl = $("<img>").attr({"src": urlImage, "alt":"News Image Thumbnail"});
             imageEl.css(
               //thumbnail styling
               {
@@ -176,20 +179,33 @@ $(document).ready(function() {
                 width: "150px" /* Set a small width */
               }
             );
+            // CREATE Collection News Item
 
-  
+            var collectionItemEl = $("<a href='#modal" + i +"' class='collection-item avatar modal-trigger left-align'>");
+            var collectionItemImage = $("<img>").attr({"src": urlImage, "alt":"News Image Thumbnail"}).addClass("circle hoverable");
+            collectionItemEl.css({
+              "border-radius": "5px",
+              margin: "5px" /* Some padding */,
+               });
+
+            collectionItemEl.append(
+              collectionItemImage,
+              titleEl,
+              publishedAtEl,
+              "<span>"+sourceName+"</span>",
+            );
             // CREATE Modal - News Snippet
 
             //<!-- Modal Structure -->
             var modalEl = $("<div>").addClass("modal")
             modalEl.attr("id","modal"+i);
             var modalContentDivEl = $("<div>").addClass("modal-content")
-            var modalImage = $("<img>").attr("src", urlImage);
+            var modalImage = $("<img>").attr({"src":urlImage, "alt" : "News Snippet Image"});
             modalImage.css(
               //modal image styling
               {
                 padding: "2px" /* Some padding */,
-                width: "80%", /* Cover percentage of modal */
+                width: "70%", /* Cover percentage of modal */
                 "box-shadow": "2px 2px 5px grey" /* Small grey shadow */
               }
             );
@@ -201,20 +217,19 @@ $(document).ready(function() {
 
             var modalFooterDivEl = $("<div>").addClass("modal-footer");
             var modalFooterLinkEl = $("<a>").attr({"href": urlSource, "target": "_blank"});
-            modalFooterLinkEl.addClass("modal-action modal-close waves-effect waves-green btn-flat blue-text cyan lighten-4").text("Learn more");
+            modalFooterLinkEl.addClass("modal-action modal-close waves-effect waves-green btn-flat blue-text cyan lighten-4").text("Read Full Article");
+            modalFooterLinkEl.append($("<i class='material-icons right'>").text("subdirectory_arrow_right"));
+            
             modalFooterDivEl.append(modalFooterLinkEl);
           
             modalEl.append(modalContentDivEl, modalFooterDivEl);
       
-  
             // DISPLAY HTML elements to DOM
 
             $("#resultsSection").append(
-              imageEl,
-              titleEl,
+              collectionItemEl,
               modalEl, // not visible until modal is triggered
-              "<hr>"
-
+        
             );
             $('.modal').modal(); // open a modal using a trigger
 
