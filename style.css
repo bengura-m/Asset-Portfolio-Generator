@@ -1,0 +1,22 @@
+.container {
+  height: 100%;
+}
+
+h1,
+h4,
+h5 {
+  margin: 0px;
+}
+
+.btn {
+  margin: 20px;
+}
+
+.stock {
+  margin: 5px;
+}
+
+.modal {
+  max-height: 100%;
+  overflow: visible;
+}
