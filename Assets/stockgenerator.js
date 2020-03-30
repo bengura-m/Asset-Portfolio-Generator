@@ -1,16 +1,7 @@
 $(document).ready(function() {
-  $(".modal").modal(); // open a modal using a trigger
 
-  // when menu button clicked reloads page and goes back to start
-  $("#btn-main").on("click", function() {
-    window.location.reload();
-  });
-  // used the delegate so that buttons that were added to the dom are able to be clicked
-  $("body").on("click", ".appetite-btn", function() {
-    $("#btn-main").attr("class", "center-align show");
-
+  $("body").on("click", ".appetite-btn", function() { 
     $("#questionnare-page").text("");
-    // checks to see what button is clicked and then assigns a beta range
     if (this.id === "conservative") {
       betaRange = "conservative";
     } else if (this.id === "balanced") {
@@ -43,8 +34,7 @@ $(document).ready(function() {
           method: "GET",
           headers: {
             "x-rapidapi-host": "apidojo-yahoo-finance-v1.p.rapidapi.com",
-            "x-rapidapi-key":
-              "43d993ffedmsh99ef2e1a86cfdf9p100046jsnaa81b3c2dd02"
+            "x-rapidapi-key":  "43d993ffedmsh99ef2e1a86cfdf9p100046jsnaa81b3c2dd02"
           }
         };
         $.ajax(settings).done(function(response) {
@@ -55,7 +45,6 @@ $(document).ready(function() {
         console.log(response); // remove this line on pushing to master/production
         localStorage.setItem("storedTickerArray" + i, JSON.stringify(response));
         var beta = response.defaultKeyStatistics.beta.fmt;
-        // goes through stocks and only prints the stocks that fall within a beta range that was cicked and stored in betaRange variable
         if (beta < 0.7 && betaRange === "conservative") {
           printStocks();
         } else if (beta < 1.5 && beta > 0.7 && betaRange === "balanced") {
@@ -64,7 +53,6 @@ $(document).ready(function() {
           printStocks();
         }
 
-        // prints stocks on the DOM
         function printStocks() {
           var shareName = response.price.longName;
           var shareSymbol = response.price.symbol;
@@ -77,9 +65,7 @@ $(document).ready(function() {
 
           // creates div tag and appends share details
           var divTag = $("<button>");
-
-          divTag.attr("class", "stock waves-effect");
-
+          divTag.attr("class", "stock col 2 card-panel blue");
           // adds a value attribute for when clicked for news API
           divTag.attr("value", shareName);
           divTag.append(
@@ -94,25 +80,22 @@ $(document).ready(function() {
             beta
           );
           $("#stocks").append(divTag);
-        }
-      }
-    }
-    // click listener for when a stock is clicked, then share name is passed to the getnews function and run
-    $(document).on("click", ".stock", function() {
-      // when share button is clicked
-      $("#resultsSection").empty();
-      getNews(this.value);
-    });
+        } // click listener for when a stock is clicked, then share name is passed to the news
+
+      }      
+    }  $(document).on("click", ".stock", function() {
+          // when share button is clicked
+          $("#resultsSection").empty();
+          getNews(this.value);
+        });
   });
   // start of news section
   // var shareName = "ASX News"; // default  = "ASX News"
 
   function getNews(shareName) {
     console.log(shareName); // remove on pushing to master
-
     var searchTermQualifier = "";
-    var newsSourceList = [
-      //source names are case sensetive and specific to match response - do not change
+    var newsSourceList = [ //source names are case sensetive and specific to match response - do not change
       "Fool.com.au",
       "Australian Financial Review",
       "Savings.com.au",
@@ -143,25 +126,26 @@ $(document).ready(function() {
     };
 
     $.ajax(settings).done(function(response) {
-      console.log(response);
       var relevantResult = false;
       var count = 0; //keep count of number of relevant results
-
+      $("#resultsSection").append(
+        "<h3 class='animated bounceInDown bold-text'>Top News Stories</h3><hr>"
+      );
       if (response.totalResults > 0) {
         for (var i = 0; i < response.articles.length; i++) {
-          if (newsSourceList.includes(response.articles[i].source.name)) {
-            //if result article is in our list of news sources, helps filter relevant results
+          if (newsSourceList.includes(response.articles[i].source.name)) { //if result article is in our list of news sources, helps filter relevant results
             console.log(
               newsSourceList.includes(response.articles[i].source.name)
             ); //remove when pushed to master
             relevantResult = true;
-            count++;
-            //GET title and source URL
+            count++; 
+            //GET title, source Name & URL
             var title = response.articles[i].title;
-            var titleEl = $("<a>").text(title);
+            var titleEl = $("<b><a>").text(title);
             var urlSource = response.articles[i].url;
-
-            titleEl.addClass("waves-effect waves-dark modal-trigger col 9"); //.modal-trigger class makes modal visible based on id
+            var sourceName = response.articles[i].source.name
+        
+            titleEl.addClass("waves-effect waves-dark modal-trigger"); //.modal-trigger class makes modal visible based on id
             titleEl.attr("href", "#modal" + i);
 
             //GET descripition
@@ -175,8 +159,7 @@ $(document).ready(function() {
 
             //GET Author
             var author = response.articles[i].author;
-            var authorEl = $("<p>").text(author);
-
+  
             //GET publish date time
             var publishedAt = response.articles[i].publishedAt;
             publishedAt = new Date(publishedAt).toDateString(); // reformat date time
@@ -184,68 +167,56 @@ $(document).ready(function() {
 
             //GET image url
             var urlImage = response.articles[i].urlToImage;
-            var imageEl = $("<img>")
-              .attr("src", urlImage)
-              .addClass("col 3");
-            imageEl.css(
-              //thumbnail styling
-              {
-                border: "1px solid #ddd" /* Gray border */,
-                "border-radius": "4px" /* Rounded border */,
-                padding: "5px" /* Some padding */,
-                margin: "5px" /* Some padding */,
-                width: "150px" /* Set a small width */
-              }
-            );
 
+            // CREATE Collection News Item
+
+            var collectionItemEl = $("<a href='#modal" + i +"' class='animated zoomIn collection-item avatar z-depth-2 modal-trigger left-align'>");
+            var collectionItemImage = $("<img class='responsive-img z-depth-1'>").attr({"src": urlImage, "alt":"News Image Thumbnail"}).addClass("circle hoverable");
+            collectionItemEl.css({
+              "border-radius": ".5rem",
+              margin: "0.8rem" /* Some padding */,
+               });
+
+            collectionItemEl.append(
+              collectionItemImage,
+              titleEl,
+              publishedAtEl,
+              "<span>" + author + "  |  "+ sourceName + "</span>",
+            );
             // CREATE Modal - News Snippet
 
             //<!-- Modal Structure -->
-            var modalEl = $("<div>").addClass("modal");
-            modalEl.attr("id", "modal" + i);
-            var modalContentDivEl = $("<div>").addClass("modal-content");
+            var modalEl = $("<div>").addClass("modal")
+            modalEl.attr("id","modal"+i);
+            var modalContentDivEl = $("<div>").addClass("modal-content")
+            var modalImage = $("<img class='responsive-img z-depth-2'>").attr({"src":urlImage, "alt" : "News Snippet Image"});
 
             var modalHeaderEl = $("<h4>").text(shareName);
             var modalHeaderTitleEl = $("<h5>").text(title);
-
+ 
             var modalTextEl = $("<p>").text(content);
-            modalContentDivEl.append(
-              imageEl,
-              modalHeaderEl,
-              "<hr>",
-              modalHeaderTitleEl,
-              modalTextEl
-            );
+            modalContentDivEl.append(modalImage, modalHeaderEl, "<hr>", modalHeaderTitleEl, modalTextEl);
 
             var modalFooterDivEl = $("<div>").addClass("modal-footer");
-            var modalFooterLinkEl = $("<a>").attr({
-              href: urlSource,
-              target: "_blank"
-            });
-            modalFooterLinkEl
-              .addClass(
-                "modal-action modal-close waves-effect waves-green btn-flat"
-              )
-              .text("Read Full Article");
+            var modalFooterLinkEl = $("<a>").attr({"href": urlSource, "target": "_blank"});
+            modalFooterLinkEl.addClass("modal-action modal-close waves-effect waves-green btn-flat blue-text cyan lighten-4").text("Read More");
+            modalFooterLinkEl.append($("<i class='material-icons right'>").text("subdirectory_arrow_right"));
+            
             modalFooterDivEl.append(modalFooterLinkEl);
-
+          
             modalEl.append(modalContentDivEl, modalFooterDivEl);
-
+      
             // DISPLAY HTML elements to DOM
-            var divTag = $("<div>");
-            divTag.attr("class", "row");
-            divTag.append(
-              imageEl,
-              titleEl,
-              modalEl // not visible until modal is triggered
-            );
-            $("#resultsSection")
-              .append(divTag)
-              .append("<hr>");
-            $(".modal").modal();
 
-            if (count === 10) {
-              // limit relevant results to 10
+            $("#resultsSection").append(
+              collectionItemEl,
+              modalEl, // not visible until modal is triggered
+        
+            );
+            $('.modal').modal(); // open a modal using a trigger
+
+            if (count === 5) {
+              // limit relevant results to 5
               break;
             }
           }
@@ -269,4 +240,5 @@ $(document).ready(function() {
       }
     }); // ajax API call close
   } // getNews function close
+
 });
