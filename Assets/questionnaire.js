@@ -2,9 +2,16 @@ $(document).ready(function() {
   var totalScore = 0;
 
   $("#btn-questionnaire").on("click", function() {
+    // make main page disappear and display first question
+    $("#btn-main").attr("class", "center-align show");
     $("#main-page").attr("class", "hide");
     questionIndex = 0;
     questionDisplay();
+  });
+
+  // reloads page when main menu clicked at end - this was the easiest way without manually resetting everything
+  $("body").delegate("#restart", "click", function() {
+    window.location.reload();
   });
 
   function questionDisplay() {
@@ -20,13 +27,15 @@ $(document).ready(function() {
       $("#questionnare-page").append(btnTag);
     }
 
+    // adds score depending on what answer/button is clicked
     $("button").on("click", function() {
       totalScore = parseInt(totalScore) + parseInt($(this).val());
       console.log(parseInt(totalScore));
 
+      // display next question otherwise display result
       questionIndex++;
       if (questionIndex === questions.length) {
-        $("#questionnare-page").text("")
+        $("#questionnare-page").text("");
         resultsDisplay();
       } else {
         $("#questionnare-page").text("");
@@ -35,10 +44,63 @@ $(document).ready(function() {
     });
   }
 
-  function resultsDisplay () {
-      $("#questionnare-page").text("Your final score is: " + totalScore)
+  // depending on end totalScore, differnet text and buttons are presented - a bit messy (something to work on in fututre)
+  function resultsDisplay() {
+    if (totalScore <= 14) {
+      $("#questionnare-page")
+        .text("You have a Conservative Risk Profile")
+        .css("font-size", "25px")
+        .append("<br>");
+      $("#questionnare-page").append(
+        $("<button>")
+          .text("Create Conservative Portfolio")
+          .attr("class", "appetite-btn waves-effect waves-light btn")
+          .attr("id", "conservative")
+      );
+      $("#questionnare-page").append(
+        $("<button>")
+          .text("Main Menu")
+          .attr("class", "waves-effect waves-light btn")
+          .attr("id", "restart")
+      );
+    } else if (totalScore <= 22) {
+      $("#questionnare-page")
+        .text("You have a Balanced Risk Profile")
+        .css("font-size", "25px")
+        .append("<br>");
+      $("#questionnare-page").append(
+        $("<button>")
+          .text("Create Balanced Portfolio")
+          .attr("class", "appetite-btn waves-effect waves-light btn")
+          .attr("id", "balanced")
+      );
+      $("#questionnare-page").append(
+        $("<button>")
+          .text("Main Menu")
+          .attr("class", "waves-effect waves-light btn")
+          .attr("id", "restart")
+      );
+    } else {
+      $("#questionnare-page")
+        .text("You have an Aggressive Risk Profile")
+        .css("font-size", "25px")
+        .append("<br>");
+      $("#questionnare-page").append(
+        $("<button>")
+          .text("Create Aggressive Portfolio")
+          .attr("class", "appetite-btn waves-effect waves-light btn")
+          .attr("id", "aggressive")
+      );
+      $("#questionnare-page").append(
+        $("<button>")
+          .text("Main Menu")
+          .attr("class", "waves-effect waves-light btn")
+          .attr("id", "restart")
+      );
+    }
   }
 
+  // questions - could be put in seperate js file to shorten if required
   var questions = [
     {
       question:
