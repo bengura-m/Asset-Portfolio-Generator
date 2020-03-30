@@ -5,42 +5,19 @@ html
 }
 
 body {
-  /* background-image: linear-gradient(to top, #d5d4d0 0%, #d5d4d0 1%, #eeeeec 31%, #efeeec 75%, #e9e9e7 100%); */
-  background-image: url(https://wallpapercave.com/wp/wp2446295.jpg);
+
+  background-image: url(https://wallpapercave.com/wp/wp2019293.jpg);
   background-position: center;
   background-repeat: repeat;
   background-size: cover;
-  /* filter: brightness(50%); */
+  display: flex;
+  min-height: 100vh;
+  flex-direction: column;
 
 }
-.hero-image {
-  /* background-image: linear-gradient(rgba(0, 0, 0, 0.5), rgba(0, 0, 0, 0.5)), url('https://cdn.pixabay.com/photo/2017/06/17/10/17/entrepreneur-2411763_960_720.jpg'); */
-  /* height: 30%; */
-  width: 100%;
-  background-position: center;
-  background-repeat: no-repeat;
-  background-size: cover;
-  position: relative;
+ .hero-image {
   filter: brightness(50%);
 }
-.hero-text {
-
-  text-align: center;
-  position: absolute;
-  top: 60%;
-  left: 50%;
-  transform: translate(-50%, -50%);
-  color: white;
-}
-
-
-
-
-.container {
-   min-height: 1200px !important;
-   padding-top: 20px;
-}
-
 
 .row {
   margin: 0px;
@@ -64,18 +41,13 @@ p {
   color: black;
 }
 
-.header {
-background-color: #2186fd;
-background-image: linear-gradient(90deg, #2186fd 0%, #8721ff 81%);
-/* padding: 60px; */
-
-}
-
-
 h1 {
   font-family: 'Roboto', sans-serif;
 }
 
+.card-title-text {
+  padding-top: 0.5rem !important;
+}
 #resultsSection {
   padding-left: 50px;
   padding-right: 50px;
@@ -88,22 +60,21 @@ h1 {
 }
 
 .collection a.collection-item:not(.active):hover {
-  background-color: #3b6978;
-  color: whitesmoke;
+  background-color: #623b78 ;
+  color: white !important;
   
 }
 
 .collection a.collection-item:not(.active):hover {
-  background-color: #3b6978;
-  color: whitesmoke;
+  background-color: #7113b1;
+  color: white;
   
+}
 
-/* hr {
-  height: 2px;
-  background: grey;
-} */
+main {
+  flex: 1 0 auto;
+}
 
-/* .modal-trigger {
-  font-size: 20px;
-
-} */
+.nav-wrapper {
+  white-space: nowrap; 
+}

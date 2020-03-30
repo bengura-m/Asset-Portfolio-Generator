@@ -1,4 +1,15 @@
 $(document).ready(function() {
+  
+  $('.sidenav').sidenav();
+
+  $('.slider').slider({
+    indicators: false,
+    height: 500,
+    transition: 500,
+    interval: 6000,
+  });
+
+  $('.scrollspy').scrollSpy();
 
   $("body").on("click", ".appetite-btn", function() { 
     $("#questionnare-page").text("");
@@ -65,7 +76,7 @@ $(document).ready(function() {
 
           // creates div tag and appends share details
           var divTag = $("<button>");
-          divTag.attr("class", "stock col 2 card-panel blue");
+          divTag.attr("class", "stock col 2 card-panel deep-purple white-text");
           // adds a value attribute for when clicked for news API
           divTag.attr("value", shareName);
           divTag.append(
@@ -129,7 +140,7 @@ $(document).ready(function() {
       var relevantResult = false;
       var count = 0; //keep count of number of relevant results
       $("#resultsSection").append(
-        "<h3 class='animated bounceInDown bold-text'>Top News Stories</h3><hr>"
+        "<h3 class='animated bounceInDown white-text'>Top News Stories</h3><hr>"
       );
       if (response.totalResults > 0) {
         for (var i = 0; i < response.articles.length; i++) {
@@ -170,7 +181,7 @@ $(document).ready(function() {
 
             // CREATE Collection News Item
 
-            var collectionItemEl = $("<a href='#modal" + i +"' class='animated zoomIn collection-item avatar z-depth-2 modal-trigger left-align'>");
+            var collectionItemEl = $("<a href='#modal" + i +"' class='animated zoomIn collection-item indigo-text avatar z-depth-2 modal-trigger left-align'>");
             var collectionItemImage = $("<img class='responsive-img z-depth-1'>").attr({"src": urlImage, "alt":"News Image Thumbnail"}).addClass("circle hoverable");
             collectionItemEl.css({
               "border-radius": ".5rem",
@@ -199,7 +210,7 @@ $(document).ready(function() {
 
             var modalFooterDivEl = $("<div>").addClass("modal-footer");
             var modalFooterLinkEl = $("<a>").attr({"href": urlSource, "target": "_blank"});
-            modalFooterLinkEl.addClass("modal-action modal-close waves-effect waves-green btn-flat blue-text cyan lighten-4").text("Read More");
+            modalFooterLinkEl.addClass("modal-action modal-close waves-effect btn-flat white-text deep-purple").text("Read More");
             modalFooterLinkEl.append($("<i class='material-icons right'>").text("subdirectory_arrow_right"));
             
             modalFooterDivEl.append(modalFooterLinkEl);
