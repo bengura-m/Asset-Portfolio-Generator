@@ -16,107 +16,168 @@
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/3.7.2/animate.min.css">
     <title>Stock Portfolio Generator</title>
   </head>
-  <body>
-    <header class="header">
-      <nav>
-        <div class="nav-wrapper deep-purple darken-4">
-          <a href="#!" class="brand-logo"><i class="material-icons">assessment</i>Stock Profile Generator</a>
-          <ul class="right hide-on-med-and-down">
-            <li id="btn-main" class="hide"><a class="waves-effect deep-purple btn"><i class="material-icons left">menu</i></a></li>
-          </ul>
+  <body id="home" class="scrollspy">
+    <!-- Navbar -->
+    <div class="navbar-fixed">
+      <nav class="deep-purple darken-4">
+        <div class="container">
+          <div class="nav-wrapper">
+            <a href="." class="brand-logo">
+              <i class="material-icons">assessment</i>Stock Portfolio Generator
+            </a>
+            <a href="#!" data-target="mobile-nav" class="sidenav-trigger">
+              <i class="material-icons">menu</i>
+            </a>
+            <ul class="right hide-on-med-and-down">
+              <li>
+                <a href=".">Home</a>
+              </li>
+              <li>
+                <a href="#appetite">Risk Appetite</a>
+              </li>
+                <li>
+                  <a href="#questionnaire">Questionnaire</a>
+                </li>
+            </ul>
+          </div>
         </div>
       </nav>
-
-    </header>
-
-<main class="center-align container">
-  <div id="main-page">
-          <div class="hero-image">
-            <img src="https://cdn.pixabay.com/photo/2017/06/17/10/17/entrepreneur-2411763_960_720.jpg" class="responsive-img">
-          </div>
-          <div class="hero-text">
-            <h2 style="font-size:3rem">Want to get into the stock market but don't know what stocks to
-                choose?</h2>
-                <p>You are at the right place!</p>
-            </div>
-            
-            
-            <div class="row flow-text">
-              <h4 class="teal white-text">Select your risk appetite and we will create a list of stocks for you.</h4>
-              
-              <div class="col s12 m4">
-                <div class="card">
-                  <div class="card-image">
-                    <img src="https://images.pexels.com/photos/211151/pexels-photo-211151.jpeg?auto=compress&cs=tinysrgb&dpr=1&w=500">
-                    <h5 class="card-title-text">Conservative</h5>
-                  </div>
-                  <div class="card-content">
-                    <p>Investors who want their money to grow but do not want to risk their principle investment. Conservative investors choose financial products that do not fluctuate much in value, such as conservative mutual funds.</p>
-                  </div>
-                  <div class="card-action">
-                    <a id="conservative" class="appetite-btn waves-effect waves-light btn"
-                    ><i class="material-icons left">trending_flat</i>Conservative</a>
-                  </div>
-                </div>
-              </div>
-              
-              <div class="col s12 m4">
-                <div class="card">
-                  <div class="card-image">
-                    <img src="https://images.pexels.com/photos/816377/pexels-photo-816377.jpeg?auto=compress&cs=tinysrgb&dpr=1&w=500">
-                    <h5 class="card-title-text">Balanced</h5>
-                  </div>
-                  <div class="card-content">
-                    <p>Investors whose objective is to obtain a balance of security, income and growth with security and income ranking before growth in priority. Looks to invest around 50% in growth assets and the remainder in defensive assets</p>
-                  </div>
-                  <div class="card-action">
-                    <a id="balanced" class="appetite-btn waves-effect waves-light btn"
-                    ><i class="material-icons left">tune</i>Balanced</a>
-                  </div>
-                </div>
-              </div>
-              
-              <div class="col s12 m4">
-                <div class="card">
-                  <div class="card-image">
-                    <img src="https://images.pexels.com/photos/652348/pexels-photo-652348.jpeg?auto=compress&cs=tinysrgb&dpr=1&w=500">
-                    <h5 class="card-title-text">Agressive</h5>
-                  </div>
-                  <div class="card-content">
-                    <p>Investors who put a large part of their portfolios in stocks of less well-established companies without a history of earnings or dividends. Sometimes gets higher returns for taking big risks, but must actively monitor the stocks they invest in.</p>
-                  </div>
-                  <div class="card-action">
-                    <a id="aggressive" class="appetite-btn waves-effect waves-light btn"
-                    ><i class="material-icons left">trending_up</i>Aggressive</a>
-                  </div>
-                </div>
-              </div>
-
-            </div>
-            <h5>
-              Don't know your risk appetite? <br>Complete our quick Questionnaire and
-              we'll tell you.
-            </h5>
-            <a id="btn-questionnaire" class="waves-effect waves-light btn"
-              ><i class="material-icons left">assignment_turned_in</i>Complete
-              Questionnaire</a
-            >
+    </div>
+    <ul id="mobile-nav" class="sidenav">
+      <li>
+        <a href="." id="btn-main">Home</a>
+      </li>
+      <li>
+        <a href="#appetite">Risk Appetite</a>
+      </li>
+      <li>
+        <a href="#questionnaire">Questionnaire</a>
+      </li>
+    </ul>
+    
+  <main class="center-align container">
+    <div id="main-page">
+    <!-- Section: Slider -->
+    <section class="slider">
+      <ul class="slides">
+        <li>
+          <img src="https://cdn.pixabay.com/photo/2017/06/17/10/17/entrepreneur-2411763_960_720.jpg" class="hero-image"> <!-- Stocks image -->
+        <div class="caption center-align">
+          <h2>Want to get into the stock market but don't know what stocks to
+            choose?</h2>
+          <h5 class="light grey-text text-lighten-3">You're at the right place!</h5>
         </div>
-
-     
-      <div id="questionnare-page" class="center-align"></div>
-      <div id="results"></div>
-      <div id="stocks" class="row"></div>
-      <div id="resultsSection" class="collection card  blue lighten-3">
+      </li>
+      <li>
+        <img src="https://cdn.pixabay.com/photo/2015/11/07/12/02/business-1031754__340.jpg" class="hero-image"> <!-- News image -->
+        <div class="caption left-align">
+          <h2>Want the latest news ASX stocks?</h2>
+          <h5 class="light grey-text text-lighten-3">Research articles from reputable news sources</h5>
+        </div>
+      </li>
+    </ul>
+  </section>
+  
+  <!-- Section: Risk Appetite -->
+  <div class="section deep-purple darken-4 white-text center scrollspy" id="appetite">
+    <div class="container">
+      
+      <div class="row"> 
+        <div class="col s12">
+          <h4>Select your risk appetite</h4>
+        </div>
       </div>
-    </main>
-    <script
-      src="https://code.jquery.com/jquery-latest.min.js"
-      type="text/javascript"
-    ></script>
+      
+      <div class="row">
+        <div class="col s12 m4">
+          <div class="card">
+            <div class="card-image">
+              <img src="https://images.pexels.com/photos/211151/pexels-photo-211151.jpeg?auto=compress&cs=tinysrgb&dpr=1&w=500">
+              <h5 class="card-title-text indigo-text">Conservative</h5>
+            </div>
+            <div class="card-content">
+              <p class="indigo-text">Investors who want their money to grow but do not want to risk their principle investment. Conservative investors choose financial products that do not fluctuate much in value, such as conservative mutual funds.</p>
+            </div>
+            <div class="card-action">
+              <a id="conservative" class="appetite-btn deep-purple waves-effect waves-light btn center"
+              ><i class="material-icons left">trending_flat</i>Conservative</a>
+            </div>
+          </div>
+        </div>
+        
+        <div class="col s12 m4">
+          <div class="card">
+            <div class="card-image">
+              <img src="https://images.pexels.com/photos/816377/pexels-photo-816377.jpeg?auto=compress&cs=tinysrgb&dpr=1&w=500">
+              <h5 class="card-title-text indigo-text">Balanced</h5>
+            </div>
+            <div class="card-content">
+              <p class="indigo-text">Investors whose objective is to obtain a balance of security, income and growth with security and income ranking before growth in priority. Looks to invest around 50% in growth assets and the remainder in defensive assets</p>
+            </div>
+            <div class="card-action">
+              <a id="balanced" class="appetite-btn deep-purple waves-effect waves-light btn center"
+              ><i class="material-icons left">tune</i>Balanced</a>
+            </div>
+          </div>
+        </div>
+        
+        <div class="col s12 m4">
+          <div class="card">
+            <div class="card-image">
+              <img src="https://images.pexels.com/photos/652348/pexels-photo-652348.jpeg?auto=compress&cs=tinysrgb&dpr=1&w=500">
+              <h5 class="card-title-text indigo-text">Aggressive</h5>
+            </div>
+            <div class="card-content">
+              <p class="indigo-text">Investors who put a large part of their portfolios in stocks of less well-established companies without a history of earnings or dividends. Sometimes gets higher returns for taking big risks, but must actively monitor the stocks they invest in.</p>
+            </div>
+            <div class="card-action">
+              <a id="aggressive" class="appetite-btn deep-purple waves-effect waves-light btn center"
+              ><i class="material-icons left">trending_up</i>Aggressive</a>
+            </div>
+          </div>
+        </div>
+        
+      </div>
+    </div>
+    <!-- Section: Questionnaire  -->
+    <section class="scrollspy">
+      <div class="row"> 
+        <div class="col s12">
+          <h4>Don't know your risk appetite?</h4>
+          <br>
+        </div>
+        <div id="questionnaire" class="scrollspy">
+          <a id="btn-questionnaire" class="deep-purple waves-effect waves-light btn"
+          ><i class="material-icons left">assignment_turned_in</i>Complete Questionnaire</a>
+        </div>
+      </div>
+    </section>
 
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0/js/materialize.min.js"></script>
-    <script src="Assets/questionnaire.js"></script>
-    <script src="Assets/stockgenerator.js"></script>
+    </div>
+      
+  </div>
+     <!-- Javascript Dynamic Elements  -->
+    <div id="questionnare-page" class="section center-align white-text"><br></div>
+    
+    <div id="results"></div>
+    <div id="stocks" class="row"></div>
+    <div id="resultsSection" class="collection"></div>
+    </main>
+
+    <!-- Footer -->
+  <footer class="section deep-purple darken-4 grey-text center">
+      <p class="flow-text">
+        The Greatest Stock App &copy; 2020
+      </p>
+  </footer>
+  
+  <script
+    src="https://code.jquery.com/jquery-latest.min.js"
+    type="text/javascript"
+  ></script>
+
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0/js/materialize.min.js"></script>
+  <script src="Assets/questionnaire.js"></script>
+  <script src="Assets/stockgenerator.js"></script>
   </body>
 </html>

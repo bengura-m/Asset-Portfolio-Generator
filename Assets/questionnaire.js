@@ -16,13 +16,13 @@ $(document).ready(function() {
 
   function questionDisplay() {
     //   adds h tag and inserts question title
-    var questionTitle = $("<h5>").text(questions[questionIndex].question);
+    var questionTitle = $("<h5 class='white-text'>").text(questions[questionIndex].question);
     $("#questionnare-page").append(questionTitle);
     //   loops through choices and adds buttons for each one
     for (i = 0; i < questions[questionIndex].choices.length; i++) {
       var btnTag = $("<button>")
         .text(questions[questionIndex].choices[i])
-        .attr("class", "waves-effect waves-light btn")
+        .attr("class", "deep-purple waves-effect waves-light btn")
         .attr("value", i + 1);
       $("#questionnare-page").append(btnTag);
     }
@@ -54,13 +54,13 @@ $(document).ready(function() {
       $("#questionnare-page").append(
         $("<button>")
           .text("Create Conservative Portfolio")
-          .attr("class", "appetite-btn waves-effect waves-light btn")
+          .attr("class", "deep-purple appetite-btn waves-effect waves-light btn")
           .attr("id", "conservative")
       );
       $("#questionnare-page").append(
         $("<button>")
           .text("Main Menu")
-          .attr("class", "waves-effect waves-light btn")
+          .attr("class", "deep-purple waves-effect waves-light btn")
           .attr("id", "restart")
       );
     } else if (totalScore <= 22) {
@@ -71,13 +71,13 @@ $(document).ready(function() {
       $("#questionnare-page").append(
         $("<button>")
           .text("Create Balanced Portfolio")
-          .attr("class", "appetite-btn waves-effect waves-light btn")
+          .attr("class", "deep-purple appetite-btn waves-effect waves-light btn")
           .attr("id", "balanced")
       );
       $("#questionnare-page").append(
         $("<button>")
           .text("Main Menu")
-          .attr("class", "waves-effect waves-light btn")
+          .attr("class", "deep-purple waves-effect waves-light btn")
           .attr("id", "restart")
       );
     } else {
@@ -88,13 +88,13 @@ $(document).ready(function() {
       $("#questionnare-page").append(
         $("<button>")
           .text("Create Aggressive Portfolio")
-          .attr("class", "appetite-btn waves-effect waves-light btn")
+          .attr("class", "deep-purple appetite-btn waves-effect waves-light btn")
           .attr("id", "aggressive")
       );
       $("#questionnare-page").append(
         $("<button>")
           .text("Main Menu")
-          .attr("class", "waves-effect waves-light btn")
+          .attr("class", "deep-purple waves-effect waves-light btn")
           .attr("id", "restart")
       );
     }
