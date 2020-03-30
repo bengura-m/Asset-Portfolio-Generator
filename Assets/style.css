@@ -96,14 +96,14 @@ h1 {
 .collection a.collection-item:not(.active):hover {
   background-color: #3b6978;
   color: whitesmoke;
-  
+}
 
-/* hr {
+ /* hr {
   height: 2px;
   background: grey;
-} */
+}
 
-/* .modal-trigger {
+.modal-trigger {
   font-size: 20px;
 
-} */
+}  */
