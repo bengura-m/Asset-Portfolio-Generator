@@ -125,7 +125,7 @@ $(document).ready(function() {
 
     {
       question:
-        "If asked to make your own investment decisions how would you feel?",
+        "If asked to make your own investment decisions, how would you feel?",
       choices: [
         "Not confident at all",
         "Somewhat hesitant",
