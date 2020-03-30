@@ -9,12 +9,6 @@ If l don’t know my risk profile, I select the option to participate in a quiz 
 Once my risk tolerance is determined from quiz, I am presented with a selection of stocks that align my risk profile;
 When l click on each stock suggestion, I am presented with top news stories about my recommended stocks;
 
-We used the Materialize css framework, yahoo finance API and news API for the stock news articles
-
-We had exposure to different github functions as we created issues and assigned them to make sure workflow was suitable and the job was completed on time by using the projects function.
-
-Pull requests were also used by us for the first time as we had a number of different branches that we needed to merge into master without causing any integration problems
-
 ## Stock Portfolio Page ##
 
 ![Screenshot of the website](Assets/Stockgenerator.png)
