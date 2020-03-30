@@ -106,6 +106,10 @@ $(document).ready(function() {
       }
       function displayStocks(response) {
         console.log(response); // remove this line on pushing to master/production
+        // if doesnt get a response object returns out so that it can go to next stock rather than exiting with error
+        if (response === null) {
+          return;
+        }
         localStorage.setItem("storedTickerArray" + i, JSON.stringify(response));
         var beta = response.defaultKeyStatistics.beta.fmt;
         if (beta <= 0.7 && betaRange === "conservative") {
