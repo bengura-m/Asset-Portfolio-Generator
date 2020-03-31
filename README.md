@@ -30,7 +30,7 @@ MwansaMwango
 
     HTML 
     CSS 
-    Bootstrap
+    Materialize CSS
     VS Code
     Javascript
     Yahoo API
