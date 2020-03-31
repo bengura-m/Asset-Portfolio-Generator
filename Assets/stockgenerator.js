@@ -102,7 +102,7 @@ $(document).ready(function() {
           $.ajax(settings).done(function(response) {
             displayStocks(response);
           });
-        }, delay++ * 1200);
+        }, delay++ * 300);
       }
       function displayStocks(response) {
         console.log(response); // remove this line on pushing to master/production
